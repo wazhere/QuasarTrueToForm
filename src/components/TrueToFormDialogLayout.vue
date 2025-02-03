@@ -38,11 +38,15 @@ export default {
     }
   },
   emits: ['update:modelValue'],
-  mounted () {
-    this.LoadWidgetScript()
-  },
-  unmounted () {
-    // this.UnloadWidgetScript()
+  watch: {
+    modelValue(newVal) {
+      if (newVal) {
+        // When dialog opens, initialize the widget
+        this.$nextTick(() => {
+          this.LoadWidgetScript()
+        })
+      }
+    }
   },
   methods: {
     UnloadWidgetScript () {
@@ -52,24 +56,23 @@ export default {
       }
     },
     LoadWidgetScript () {
-      // Check if the script is already loaded
-      if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')) {
-        this.InitializeWidget()
-        return
+      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
+      
+      if (script) {
+        // If script exists, remove it first
+        script.remove()
       }
 
-      // Dynamically create a script tag and load the external JS file
-      const script = document.createElement('script')
-      script.type = 'module'
-      script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
+      // Create new script
+      const newScript = document.createElement('script')
+      newScript.type = 'module'
+      newScript.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
 
-      // Once the script is loaded, initialize the widget
-      script.onload = () => {
+      newScript.onload = () => {
         this.InitializeWidget()
       }
 
-      // Append the script to the document body
-      document.body.appendChild(script)
+      document.body.appendChild(newScript)
     },
     InitializeWidget () {
       const container = document.querySelector('#TTF_WIDGET_CONTAINER')

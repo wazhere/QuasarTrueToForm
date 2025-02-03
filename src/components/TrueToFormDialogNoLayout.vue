@@ -25,69 +25,72 @@
     </q-dialog>
   </template>
   
-  <script>
-  export default {
-    name: 'TrueToFormDialog',
-    props: {
-      modelValue: {
-        type: Boolean,
-        required: true
-      }
-    },
-    emits: ['update:modelValue'],
-    mounted () {
-      this.LoadWidgetScript()
-    },
-    unmounted () {
-      // this.UnloadWidgetScript()
-    },
-    methods: {
-      UnloadWidgetScript () {
-        const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
-        if (script) {
-          document.body.removeChild(script)
-        }
-      },
-      LoadWidgetScript () {
-        // Check if the script is already loaded
-        if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')) {
-          this.InitializeWidget()
-          return
-        }
-  
-        // Dynamically create a script tag and load the external JS file
-        const script = document.createElement('script')
-        script.type = 'module'
-        script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
-  
-        // Once the script is loaded, initialize the widget
-        script.onload = () => {
-          this.InitializeWidget()
-        }
-  
-        // Append the script to the document body
-        document.body.appendChild(script)
-      },
-      InitializeWidget () {
-        const container = document.querySelector('#TTF_WIDGET_CONTAINER')
-  
-        if (!container) {
-          console.error('TTF Widget container not found.')
-          return
-        }
-  
-        const apiKey = container.getAttribute('data-api-key')
-        const productId = container.getAttribute('data-product-id')
-  
-        if (!apiKey || !productId) {
-          console.error('Missing API key or Product ID.')
-          // return
-        }
-  
-        // Call the widget's initialization logic here if necessary
-        // This depends on what the external JS provides
-        // console.log("TTF Widget initialized with API Key:", apiKey, "and Product ID:", productId)
+<script>
+export default {
+  name: 'TrueToFormDialog',
+  props: {
+    modelValue: {
+      type: Boolean,
+      required: true
+    }
+  },
+  emits: ['update:modelValue'],
+  watch: {
+    modelValue(newVal) {
+      if (newVal) {
+        // When dialog opens, initialize the widget
+        this.$nextTick(() => {
+          this.LoadWidgetScript()
+        })
       }
     }
+  },
+  methods: {
+    UnloadWidgetScript () {
+      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
+      if (script) {
+        document.body.removeChild(script)
+      }
+    },
+    LoadWidgetScript () {
+      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
+      
+      if (script) {
+        // If script exists, remove it first
+        script.remove()
+      }
+
+      // Create new script
+      const newScript = document.createElement('script')
+      newScript.type = 'module'
+      newScript.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
+
+      newScript.onload = () => {
+        this.InitializeWidget()
+      }
+
+      document.body.appendChild(newScript)
+    },
+    InitializeWidget () {
+      const container = document.querySelector('#TTF_WIDGET_CONTAINER')
+
+      if (!container) {
+        console.error('TTF Widget container not found.')
+        return
+      }
+
+      const apiKey = container.getAttribute('data-api-key')
+      const productId = container.getAttribute('data-product-id')
+
+      if (!apiKey || !productId) {
+        console.error('Missing API key or Product ID.')
+        // return
+      }
+
+      // Call the widget's initialization logic here if necessary
+      // This depends on what the external JS provides
+      // console.log("TTF Widget initialized with API Key:", apiKey, "and Product ID:", productId)
+    }
   }
-  </script> 
+}
+</script> 
