@@ -6,7 +6,7 @@
     <q-layout ref="TabRef" container class="bg-lm-lightest">
       <q-card>
         <q-card-section>
-          <div class="text-h6">TTF Modal</div>
+          <div class="text-h6">TTF Modal Layout</div>
         </q-card-section>
 
         <q-card-section>
