@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     UnloadWidgetScript() {
-      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]');
+      const script = document.querySelector('script[data-script-source="ttf-widget"]')
       if (script) {
         document.body.removeChild(script);
       }
@@ -63,6 +63,7 @@ export default {
       const script = document.createElement("script");
       script.type = "module";
       script.src = "https://ttf-widget.pages.dev/assets/integrations/custom.js";
+      script.setAttribute("data-script-source", "ttf-widget");
 
       script.onload = () => {
         this.InitializeWidget();
