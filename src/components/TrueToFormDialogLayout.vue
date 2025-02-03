@@ -1,10 +1,9 @@
 <template>
   <q-dialog
-    no-teleport
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-    <q-layout ref="TabRef" container class="bg-lm-lightest" no-teleport>
+    <q-layout ref="TabRef" container class="bg-lm-lightest">
       <q-card>
         <q-card-section>
           <div class="text-h6">TTF Modal Layout</div>
@@ -12,11 +11,14 @@
 
         <q-card-section>
           Modal stuff
-          <div
-            id="TTF_WIDGET_CONTAINER"
-            data-product-id="TH134"
-            data-api-key="i8ZWxd3vHEgf8vczXE5N"
-          ></div>
+
+        <Teleport to="body">
+            <div
+              id="TTF_WIDGET_CONTAINER"
+              data-product-id="TH134"
+              data-api-key="i8ZWxd3vHEgf8vczXE5N"
+            ></div>
+          </Teleport>
         </q-card-section>
 
         <q-card-actions align="right">
