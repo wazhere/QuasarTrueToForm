@@ -1,95 +1,100 @@
 <template>
-    <q-dialog
-      :model-value="modelValue"
-      @update:model-value="$emit('update:modelValue', $event)"
-    >
-        <q-card>
-          <q-card-section>
-            <div class="text-h6">TTF Modal No Layout</div>
-          </q-card-section>
-  
-          <q-card-section>
-            Modal stuff
-            <div
-              id="TTF_WIDGET_CONTAINER"
-              data-product-id="TH134"
-              data-api-key="i8ZWxd3vHEgf8vczXE5N"
-              style="border: solid 1px red;"
-            ></div>
-          </q-card-section>
-  
-          <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" v-close-popup />
-          </q-card-actions>
-        </q-card>
-    </q-dialog>
-  </template>
-  
+  <q-dialog
+    :model-value="modelValue"
+    @update:model-value="$emit('update:modelValue', $event)"
+    @before-show="InitializeWidget"
+  >
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">TTF Modal No Layout</div>
+      </q-card-section>
+
+      <q-card-section>
+        Modal stuff
+        <div
+          id="TTF_WIDGET_CONTAINER"
+          data-product-id="TH134"
+          data-api-key="i8ZWxd3vHEgf8vczXE5N"
+          style="border: solid 1px red;"
+        ></div>
+      </q-card-section>
+
+      <q-card-actions align="right">
+        <q-btn flat label="Close" color="primary" v-close-popup />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
+</template>
+
 <script>
 export default {
-  name: 'TrueToFormDialog',
+  name: "TrueToFormDialog",
   props: {
     modelValue: {
       type: Boolean,
       required: true
     }
   },
-  emits: ['update:modelValue'],
+  emits: ["update:modelValue"],
   mounted() {
-        this.$nextTick(() => {
-          this.LoadWidgetScript()
-        })
-    
+    this.LoadWidgetScript();
   },
-  unmounted () {
-    this.UnloadWidgetScript()
+  unmounted() {
+    this.UnloadWidgetScript();
   },
   methods: {
-    UnloadWidgetScript () {
-      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
+    UnloadWidgetScript() {
+      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]');
       if (script) {
-        document.body.removeChild(script)
+        document.body.removeChild(script);
       }
     },
-    LoadWidgetScript () {
-      const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
-      
-      if (script) {
-        // If script exists, remove it first
-        script.remove()
+    LoadWidgetScript() {
+      if (window.TTF_WIDGET) {
+        // If the widget global object exists, just reinitialize it
+        this.InitializeWidget();
+        return;
       }
 
-      // Create new script
-      const newScript = document.createElement('script')
-      newScript.type = 'module'
-      newScript.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
+      const script = document.createElement("script");
+      script.type = "module";
+      script.src = "https://ttf-widget.pages.dev/assets/integrations/custom.js";
 
-      newScript.onload = () => {
-        this.InitializeWidget()
-      }
+      script.onload = () => {
+        this.InitializeWidget();
+      };
 
-      document.body.appendChild(newScript)
+      document.body.appendChild(script);
     },
-    InitializeWidget () {
-      const container = document.querySelector('#TTF_WIDGET_CONTAINER')
+    InitializeWidget() {
+      const container = document.querySelector("#TTF_WIDGET_CONTAINER");
 
       if (!container) {
-        console.error('TTF Widget container not found.')
-        return
+        console.error("TTF Widget container not found.");
+        return;
       }
 
-      const apiKey = container.getAttribute('data-api-key')
-      const productId = container.getAttribute('data-product-id')
-
-      if (!apiKey || !productId) {
-        console.error('Missing API key or Product ID.')
-        // return
+      if (window.TTF_WIDGET) {
+        // If the widget global already exists, reinitialize it
+        try {
+          window.TTF_WIDGET.init({
+            container: container,
+            apiKey: container.getAttribute("data-api-key"),
+            productId: container.getAttribute("data-product-id")
+          });
+        } catch (err) {
+          console.error("Error reinitializing TTF Widget:", err);
+        }
+        return;
       }
 
-      // Call the widget's initialization logic here if necessary
-      // This depends on what the external JS provides
-      // console.log("TTF Widget initialized with API Key:", apiKey, "and Product ID:", productId)
+      // If the script was loaded but the widget isn't ready yet, wait for it
+      setTimeout(() => {
+        if (window.TTF_WIDGET) {
+          this.InitializeWidget();
+        }
+      }, 500);
     }
   }
-}
-</script> 
+};
+</script>
