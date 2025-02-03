@@ -11,11 +11,12 @@
 
         <q-card-section>
           Modal stuff
-
+          
             <div
               id="TTF_WIDGET_CONTAINER"
               data-product-id="TH134"
               data-api-key="i8ZWxd3vHEgf8vczXE5N"
+              style="border: solid 1px red;"
             ></div>
         </q-card-section>
 
