@@ -41,6 +41,15 @@ export default {
       required: true
     }
   },
+  watch: {
+    modelValue(newVal) {
+      if (newVal) {
+        // this.LoadWidgetScript();
+      } else {
+        this.UnloadWidgetScript();
+      }
+    }
+  },
   emits: ["update:modelValue"],
   mounted() {
     console.log("mounted");
