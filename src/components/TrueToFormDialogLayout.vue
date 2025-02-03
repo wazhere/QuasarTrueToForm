@@ -42,7 +42,7 @@ export default {
     this.LoadWidgetScript()
   },
   unmounted () {
-    this.UnloadWidgetScript()
+    // this.UnloadWidgetScript()
   },
   methods: {
     UnloadWidgetScript () {

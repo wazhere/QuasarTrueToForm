@@ -2,8 +2,10 @@
   <q-page class="flex flex-center">
     <q-btn color="primary" label="Open Modal Layout" @click="showDialogLayout = true" />&nbsp;
     <q-btn color="primary" label="Open Modal No Layout" @click="showDialogNoLayout = true" />
-    <lazy-true-to-form-dialog-layout v-model="showDialogLayout" v-if="showDialogLayout" />
-    <lazy-true-to-form-dialog-no-layout v-model="showDialogNoLayout" v-if="showDialogNoLayout" />
+    <keep-alive>
+      <lazy-true-to-form-dialog-layout v-model="showDialogLayout" v-if="showDialogLayout" />
+      <lazy-true-to-form-dialog-no-layout v-model="showDialogNoLayout" v-if="showDialogNoLayout" />
+    </keep-alive>
   </q-page>
 </template>
 
