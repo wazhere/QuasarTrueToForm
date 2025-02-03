@@ -52,7 +52,12 @@ export default defineConfig((/* ctx */) => {
       // env: {},
       // rawDefine: {}
       // ignorePublicFolder: true,
-      // minify: false,
+      minify: true,
+      uglifyOptions: {
+        compress: {
+          drop_console: false
+        }
+      },
       // polyfillModulePreload: true,
       // distDir
 
