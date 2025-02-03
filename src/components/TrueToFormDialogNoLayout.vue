@@ -21,6 +21,7 @@
       </q-card-section>
 
       <q-card-actions align="right">
+        <q-btn flat label="Unload Script" @click="UnloadWidgetScript()" />
         <q-btn flat label="Close" color="primary" v-close-popup />
       </q-card-actions>
     </q-card>
