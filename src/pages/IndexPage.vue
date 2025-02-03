@@ -1,13 +1,24 @@
 <template>
   <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
+    <q-btn color="primary" label="Open Modal" @click="showDialog = true" />
+    <lazy-true-to-form-dialog v-model="showDialog" v-if="showDialog" />
   </q-page>
 </template>
 
-<script setup>
-//
+<script>
+import { defineAsyncComponent } from 'vue'
+
+export default {
+  name: 'IndexPage',
+  components: {
+    LazyTrueToFormDialog: defineAsyncComponent(() => 
+      import('src/components/TrueToFormDialog.vue')
+    )
+  },
+  data () {
+    return {
+      showDialog: false
+    }
+  }
+}
 </script>
