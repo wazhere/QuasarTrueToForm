@@ -35,15 +35,11 @@ export default {
     }
   },
   emits: ['update:modelValue'],
-  watch: {
-    modelValue(newVal) {
-      if (newVal) {
-        // When dialog opens, initialize the widget
+  mounted() {
         this.$nextTick(() => {
           this.LoadWidgetScript()
         })
-      }
-    }
+    
   },
   methods: {
     UnloadWidgetScript () {
