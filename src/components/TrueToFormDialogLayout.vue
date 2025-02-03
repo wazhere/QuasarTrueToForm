@@ -3,9 +3,9 @@
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
   >
-  <Teleport to="body">
     <q-layout ref="TabRef" container class="bg-lm-lightest">
-      <q-card>
+      <Teleport to="body">
+        <q-card>
         <q-card-section>
           <div class="text-h6">TTF Modal Layout</div>
         </q-card-section>
@@ -24,8 +24,8 @@
           <q-btn flat label="Close" color="primary" v-close-popup />
         </q-card-actions>
       </q-card>
+    </Teleport>
     </q-layout>
-      </Teleport>
   </q-dialog>
 </template>
 
