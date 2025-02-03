@@ -49,9 +49,10 @@ export default {
   },
   methods: {
     UnloadWidgetScript() {
+      console.log("unloading script");
       const script = document.querySelector('script[data-script-source="ttf-widget"]')
       if (script) {
-        console.log("unloading script");
+        console.log("script found");
         document.body.removeChild(script);
       }
     },
