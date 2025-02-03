@@ -1,5 +1,6 @@
 <template>
   <q-dialog
+    :no-parent-event="true"
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
   >
