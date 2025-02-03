@@ -37,10 +37,14 @@ export default {
   },
   emits: ["update:modelValue"],
   mounted() {
+    console.log("mounted");
     this.LoadWidgetScript();
   },
+  created() {
+    console.log("created");
+  },
   unmounted() {
-    this.UnloadWidgetScript();
+    // this.UnloadWidgetScript();
   },
   methods: {
     UnloadWidgetScript() {
