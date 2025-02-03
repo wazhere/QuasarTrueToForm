@@ -54,6 +54,7 @@ export default {
     UnloadWidgetScript() {
       const script = document.querySelector('script[data-script-source="ttf-widget"]')
       if (script) {
+        console.log("unloading script");
         document.body.removeChild(script);
       }
     },
