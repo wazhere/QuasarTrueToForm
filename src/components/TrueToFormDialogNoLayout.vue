@@ -38,7 +38,16 @@
     mounted () {
       this.LoadWidgetScript()
     },
+    unmounted () {
+      this.UnloadWidgetScript()
+    },
     methods: {
+      UnloadWidgetScript () {
+        const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')
+        if (script) {
+          document.body.removeChild(script)
+        }
+      },
       LoadWidgetScript () {
         // Check if the script is already loaded
         if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')) {
