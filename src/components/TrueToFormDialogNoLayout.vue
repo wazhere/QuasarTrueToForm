@@ -3,6 +3,7 @@
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
     @before-show="InitializeWidget"
+    @before-hide="UnloadWidgetScript"
   >
     <q-card>
       <q-card-section>

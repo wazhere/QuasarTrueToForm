@@ -5,6 +5,7 @@
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
     @before-show="InitializeWidget"
+    @before-hide="UnloadWidgetScript"
   >
   <q-layout ref="TabRef" container class="bg-lm-lightest">
     <q-card>
