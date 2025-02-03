@@ -1,6 +1,6 @@
 <template>
   <q-dialog
-    :no-parent-event="true"
+    no-teleport
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
   >
