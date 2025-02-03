@@ -7,7 +7,7 @@
     @before-show="InitializeWidget"
     @before-hide="UnloadWidgetScript"
   >
-  <q-layout ref="TabRef" container class="bg-lm-lightest">
+  <q-layout ref="TabRef" class="bg-lm-lightest">
     <q-card>
       <q-card-section>
         <div class="text-h6">TTF Modal No Layout</div>
