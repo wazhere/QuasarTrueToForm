@@ -41,6 +41,9 @@ export default {
         })
     
   },
+  unmounted () {
+    this.UnloadWidgetScript()
+  },
   methods: {
     UnloadWidgetScript () {
       const script = document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')

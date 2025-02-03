@@ -42,7 +42,9 @@ export default {
         this.$nextTick(() => {
           this.LoadWidgetScript()
         })
-    
+  },
+  unmounted () {
+    this.UnloadWidgetScript()
   },
   methods: {
     UnloadWidgetScript () {
