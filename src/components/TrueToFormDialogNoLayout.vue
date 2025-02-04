@@ -16,8 +16,8 @@
         <div style="background-color: red; color: white">
           TTF_WIDGET_CONTAINER
         </div>
-        <div style="border: solid 1px red; height: 40px;">
-          <div class="row justify-center">
+        <div style="border: solid 1px red; height: 40px;"> 
+          <div class="row justify-center" style="padding-top: 10px;">
             <div
                 id="TTF_WIDGET_CONTAINER"
                 data-product-id="TH134"
