@@ -1,3 +1,5 @@
+
+    
 <template>
   <q-dialog
     :model-value="modelValue"
@@ -7,21 +9,27 @@
   >
     <q-card>
       <q-card-section>
-        <div class="text-h6">TTF Modal No Layout</div>
+        <div class="text-h6">TTF Example TH134 Modal</div>
       </q-card-section>
 
       <q-card-section>
-        Modal stuff
+        <div style="background-color: red; color: white">
+          TTF_WIDGET_CONTAINER
+        </div>
         <div
           id="TTF_WIDGET_CONTAINER"
           data-product-id="TH134"
           data-api-key="i8ZWxd3vHEgf8vczXE5N"
-          style="border: solid 1px red;"
+          style="border: solid 1px red; height: 40px;"
         ></div>
       </q-card-section>
 
+      <q-card-section>
+        <div style="min-width: 500px; text-align: center; padding: 30px 0; background-color: #eee;">EXISTING TH134 CHOOSE SIZE STUFF</div>
+      </q-card-section>
+
       <q-card-actions align="right">
-        <q-btn flat label="Unload Script" @click="UnloadWidgetScript()" />
+        <q-btn flat label="Unload TTF Script" @click="UnloadWidgetScript()" />
         <q-btn flat label="Close" color="primary" v-close-popup />
       </q-card-actions>
     </q-card>
@@ -37,41 +45,43 @@ export default {
       required: true
     }
   },
-  watch: {
-    modelValue(newVal) {
-      if (newVal) {
-        // this.LoadWidgetScript();
-      } else {
-        this.UnloadWidgetScript();
-      }
-    }
-  },
   emits: ["update:modelValue"],
   mounted() {
-    console.log("mounted");
+    this.Log("Vue: mounted", "orange");
     this.LoadWidgetScript();
   },
-  created() {
-    console.log("created");
-  },
   unmounted() {
+    this.Log("Vue: unmounted", "orange");
     // this.UnloadWidgetScript();
   },
   methods: {
+    Log(message, color = "green") {
+      this.$q.notify({
+        message: message,
+        color: color,
+        group: false,
+        position: 'bottom-right'
+      });
+    },
     UnloadWidgetScript() {
-      console.log("unloading script");
+      this.Log("UnloadWidgetScript called", "orange");
       const script = document.querySelector('script[data-script-source="ttf-widget"]')
       if (script) {
-        console.log("script found");
+        this.Log("UnloadWidgetScript: script found, removing", "green");
         document.body.removeChild(script);
+      } else {
+        this.Log("UnloadWidgetScript: script not found", "red");
       }
     },
     LoadWidgetScript() {
+      this.Log("LoadWidgetScript called", "orange");
+      /*
       if (window.TTF_WIDGET) {
         // If the widget global object exists, just reinitialize it
         this.InitializeWidget();
         return;
       }
+      */
 
       const script = document.createElement("script");
       script.type = "module";
@@ -115,4 +125,4 @@ export default {
     }
   }
 };
-</script>
+</script>      
