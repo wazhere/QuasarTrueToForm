@@ -17,12 +17,14 @@
         <div style="background-color: red; color: white">
           TTF_WIDGET_CONTAINER
         </div>
-        <div
-          id="TTF_WIDGET_CONTAINER"
-          data-product-id="TH134"
-          data-api-key="i8ZWxd3vHEgf8vczXE5N"
-          style="border: solid 1px red; height: 40px;"
-        ></div>
+          <div class="row justify-center">
+            <div
+                id="TTF_WIDGET_CONTAINER"
+                data-product-id="TH134"
+                data-api-key="i8ZWxd3vHEgf8vczXE5N"
+                style="border: solid 1px red; height: 40px;"
+            ></div>
+        </div>
       </q-card-section>
 
       <q-card-section>
