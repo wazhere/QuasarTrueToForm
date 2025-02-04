@@ -4,6 +4,7 @@
     @update:model-value="$emit('update:modelValue', $event)"
     @before-show="InitializeWidget"
     @before-hide="UnloadWidgetScript"
+    persistent
   >
     <q-card>
       <q-card-section>
@@ -31,7 +32,7 @@
 
       <q-card-actions align="right">
         <q-btn flat label="Unload TTF Script" @click="UnloadWidgetScript()" />
-        <q-btn flat label="Close" color="primary" v-close-popup />
+        <q-btn flat label="Close" color="primary" @click="closeDialog" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -70,6 +71,9 @@ export default {
     this.UnloadWidgetScript();
   },
   methods: {
+    closeDialog() {
+      this.$emit('update:modelValue', false)
+    },
     Log(message, color = "green") {
       this.$q.notify({
         message: message,
