@@ -47,7 +47,7 @@ export default {
     },
     methods: {
       UnloadWidgetScript () {
-        document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]').remove()
+        document.querySelector('script[data-script-source="ttf-widget"]').remove()
       },
         LoadWidgetScript () {
                 // Check if the script is already loaded
@@ -59,7 +59,8 @@ export default {
                 // Dynamically create a script tag and load the external JS file
                 const script = document.createElement('script')
                 script.type = 'module'
-                script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js?v=' + new Date().getTime()
+                script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
+                script.setAttribute('data-script-source', 'ttf-widget')
 
                 // Once the script is loaded, initialize the widget
                 script.onload = () => {
