@@ -59,7 +59,7 @@ export default {
                 // Dynamically create a script tag and load the external JS file
                 const script = document.createElement('script')
                 script.type = 'module'
-                script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
+                script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js?v=' + new Date().getTime()
 
                 // Once the script is loaded, initialize the widget
                 script.onload = () => {
