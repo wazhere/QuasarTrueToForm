@@ -18,13 +18,14 @@
             TTF_WIDGET_CONTAINER
           </div>
           <div class="row justify-center">
+            <div style="border: solid 1px red; height: 40px; display: inline-block;">
             <div
                 id="TTF_WIDGET_CONTAINER"
                 data-product-id="TH134"
                 data-api-key="i8ZWxd3vHEgf8vczXE5N"
-                style="border: solid 1px red; height: 40px;"
             ></div>
-        </div>
+          </div>
+          </div>
         </q-card-section>
   
         <q-card-section>
