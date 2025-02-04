@@ -1,5 +1,3 @@
-
-    
 <template>
   <q-dialog
     :model-value="modelValue"
@@ -53,9 +51,23 @@ export default {
     this.Log("Vue: mounted", "orange");
     this.LoadWidgetScript();
   },
+  activated() {
+    this.Log("Vue: activated from keep-alive", "blue");
+    // Don't reload the script if it already exists
+    if (!document.querySelector('script[data-script-source="ttf-widget"]')) {
+      this.LoadWidgetScript();
+    } else {
+      this.InitializeWidget();
+    }
+  },
+  deactivated() {
+    this.Log("Vue: deactivated from keep-alive", "blue");
+    // Don't unload the script when component is cached
+  },
   unmounted() {
     this.Log("Vue: unmounted", "orange");
-    // this.UnloadWidgetScript();
+    // Only unload if we're really destroying the component
+    this.UnloadWidgetScript();
   },
   methods: {
     Log(message, color = "green") {
