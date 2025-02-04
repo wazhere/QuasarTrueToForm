@@ -18,12 +18,12 @@
         </div>
         <div style="border: solid 1px red; height: 40px;"> 
           <div class="row justify-center" style="padding-top: 10px;">
-            <div
-                id="TTF_WIDGET_CONTAINER"
-                data-product-id="TH134"
-                data-api-key="i8ZWxd3vHEgf8vczXE5N"
-            ></div>
-          </div>
+          <div
+              id="TTF_WIDGET_CONTAINER"
+              data-product-id="TH134"
+              data-api-key="i8ZWxd3vHEgf8vczXE5N"
+          ></div>
+        </div>
         </div>
       </q-card-section>
 
@@ -66,10 +66,13 @@ export default {
         position: 'bottom-right'
       });
     },
+    DoesScriptExist() {
+      return document.querySelector('script[data-script-source="ttf-widget"]') ? true : false;
+    },
     UnloadWidgetScript() {
       this.Log("UnloadWidgetScript called", "orange");
-      const script = document.querySelector('script[data-script-source="ttf-widget"]')
-      if (script) {
+      if (this.DoesScriptExist()) {
+        const script = document.querySelector('script[data-script-source="ttf-widget"]')
         this.Log("UnloadWidgetScript: script found, removing", "green");
         document.body.removeChild(script);
       } else {
@@ -85,7 +88,11 @@ export default {
         return;
       }
       */
-
+      if (this.DoesScriptExist()) {
+        this.Log("LoadWidgetScript: script found, initializing widget", "green");
+        this.InitializeWidget();
+        return;
+      }
       const script = document.createElement("script");
       script.type = "module";
       script.src = "https://ttf-widget.pages.dev/assets/integrations/custom.js";

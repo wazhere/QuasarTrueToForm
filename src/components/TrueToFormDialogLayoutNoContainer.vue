@@ -68,10 +68,13 @@ export default {
         position: 'bottom-right'
       });
     },
+    DoesScriptExist() {
+      return document.querySelector('script[data-script-source="ttf-widget"]') ? true : false;
+    },
     UnloadWidgetScript() {
       this.Log("UnloadWidgetScript called", "orange");
-      const script = document.querySelector('script[data-script-source="ttf-widget"]')
-      if (script) {
+      if (this.DoesScriptExist()) {
+        const script = document.querySelector('script[data-script-source="ttf-widget"]')
         this.Log("UnloadWidgetScript: script found, removing", "green");
         document.body.removeChild(script);
       } else {
@@ -87,7 +90,11 @@ export default {
         return;
       }
       */
-
+      if (this.DoesScriptExist()) {
+        this.Log("LoadWidgetScript: script found, initializing widget", "green");
+        this.InitializeWidget();
+        return;
+      }
       const script = document.createElement("script");
       script.type = "module";
       script.src = "https://ttf-widget.pages.dev/assets/integrations/custom.js";
