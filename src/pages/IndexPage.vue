@@ -5,27 +5,9 @@
     <q-btn icon="check_circle" color="primary" label="Open Modal No Layout" @click="showDialogNoLayout = true" />&nbsp;
     <q-btn icon="error" color="primary" label="Open Modal Layout Container" @click="showDialogLayoutContainer = true" />&nbsp;
     <q-btn icon="check_circle" color="primary" label="Open Modal Layout No Container" @click="showDialogLayoutNoContainer = true" />&nbsp;
-    
-    <keep-alive>
-      <lazy-true-to-form-dialog-no-layout 
-        v-model="showDialogNoLayout" 
-        v-if="showDialogNoLayout" 
-      />
-    </keep-alive>
-
-    <keep-alive>
-      <lazy-true-to-form-dialog-layout-container 
-        v-model="showDialogLayoutContainer" 
-        v-if="showDialogLayoutContainer" 
-      />
-    </keep-alive>
-
-    <keep-alive>
-      <lazy-true-to-form-dialog-layout-no-container 
-        v-model="showDialogLayoutNoContainer" 
-        v-if="showDialogLayoutNoContainer" 
-      />
-    </keep-alive>
+    <lazy-true-to-form-dialog-no-layout v-model="showDialogNoLayout" v-if="showDialogNoLayout" />
+    <lazy-true-to-form-dialog-layout-container v-model="showDialogLayoutContainer" v-if="showDialogLayoutContainer" />
+    <lazy-true-to-form-dialog-layout-no-container v-model="showDialogLayoutNoContainer" v-if="showDialogLayoutNoContainer" />
   </div>
 </q-page>
 </template>

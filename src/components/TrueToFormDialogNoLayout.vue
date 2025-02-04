@@ -1,10 +1,11 @@
+
+    
 <template>
   <q-dialog
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
     @before-show="InitializeWidget"
     @before-hide="UnloadWidgetScript"
-    persistent
   >
     <q-card>
       <q-card-section>
@@ -32,7 +33,7 @@
 
       <q-card-actions align="right">
         <q-btn flat label="Unload TTF Script" @click="UnloadWidgetScript()" />
-        <q-btn flat label="Close" color="primary" @click="closeDialog" />
+        <q-btn flat label="Close" color="primary" v-close-popup />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -52,28 +53,11 @@ export default {
     this.Log("Vue: mounted", "orange");
     this.LoadWidgetScript();
   },
-  activated() {
-    this.Log("Vue: activated from keep-alive", "blue");
-    // Don't reload the script if it already exists
-    if (!document.querySelector('script[data-script-source="ttf-widget"]')) {
-      this.LoadWidgetScript();
-    } else {
-      this.InitializeWidget();
-    }
-  },
-  deactivated() {
-    this.Log("Vue: deactivated from keep-alive", "blue");
-    // Don't unload the script when component is cached
-  },
   unmounted() {
     this.Log("Vue: unmounted", "orange");
-    // Only unload if we're really destroying the component
-    this.UnloadWidgetScript();
+    // this.UnloadWidgetScript();
   },
   methods: {
-    closeDialog() {
-      this.$emit('update:modelValue', false)
-    },
     Log(message, color = "green") {
       this.$q.notify({
         message: message,
