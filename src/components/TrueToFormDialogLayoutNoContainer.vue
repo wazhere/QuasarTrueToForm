@@ -48,6 +48,9 @@ export default {
         this.LoadWidgetScript()
     },
     methods: {
+      UnloadWidgetScript () {
+        document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]').remove()
+      },
         LoadWidgetScript () {
                 // Check if the script is already loaded
                 if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')) {
