@@ -54,7 +54,7 @@ export default {
       // Check if the script is already loaded
       if (
         document.querySelector(
-          'script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]',
+          'script[src="https://dev-ttf-widget.pages.dev/assets/integrations/custom.js"]',
         )
       ) {
         this.InitializeWidget()
