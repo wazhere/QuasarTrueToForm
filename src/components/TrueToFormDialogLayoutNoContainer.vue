@@ -16,8 +16,8 @@
             <div class="row justify-center" style="padding-top: 10px">
               <div
                 id="TTF_WIDGET_CONTAINER"
-                data-product-id="Ca42eYkVLSEXLdhJhjq2"
-                data-api-key="9522490933534"
+                data-api-key="Ca42eYkVLSEXLdhJhjq2"
+                data-product-id="9522490933534"
               ></div>
             </div>
           </div>
