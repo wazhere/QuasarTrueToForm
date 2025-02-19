@@ -14,12 +14,15 @@
         <div style="background-color: red; color: white">
           TTF_WIDGET_CONTAINER
         </div>
-        <div style="border: solid 1px red; height: 40px;"> 
+        <div style="border: solid 1px red; height: 80px;"> 
+          (Green is the container)
           <div class="row justify-center" style="padding-top: 10px;">
           <div
+            style="border: solid 2px green; height: 40px; min-width: 500px;"
               id="TTF_WIDGET_CONTAINER"
               data-product-id="TH134"
               data-api-key="i8ZWxd3vHEgf8vczXE5N"
+
           ></div>
         </div>
         </div>
