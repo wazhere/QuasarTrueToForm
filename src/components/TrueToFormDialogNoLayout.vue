@@ -30,6 +30,7 @@
       </q-card-section>
       <q-card-section>
         <div style="min-width: 500px; text-align: center; padding: 30px 0; background-color: #eee;">
+          <h2 style="font-size: 20px; line-height: 20px; margin: 0 0 10px 0; padding:0">"Console" Logs</h2>
           {{ Logs }}
         </div>
       </q-card-section>
