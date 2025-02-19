@@ -16,7 +16,7 @@
         </div>
         <div style="border: solid 1px red; height: 80px;" class="text-center"> 
           (Green is the container DIV)
-          <div class="row justify-center" style="padding-top: 10px;" ref="ttfWidgetContainerContainer">
+          <div class="row justify-center" style="padding-top: 10px;" ref="ttfWidgetContainerContainer" data-container="ttfWidgetContainerContainer">
           <div
             
             style="border: solid 2px green; height: 40px; min-width: 500px;"
