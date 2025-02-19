@@ -1,5 +1,3 @@
-
-    
 <template>
   <q-dialog
     :model-value="modelValue"
@@ -88,57 +86,72 @@ export default {
                 // Append the script to the document body
                 document.body.appendChild(script)
             },
-            InitializeWidget () {
+            async InitializeWidget () {
               const _this = this
               _this.ConsoleLog("Initializing widget")
-// Wait until all scripts are loaded and the DOM is fully parsed
-  if (window.mountTTFWidget) {
-    // the container should be any valid HTML element
-    const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
-    // const container = this.$refs.ttfWidgetContainerContainer.firstElementChild
-    this.ConsoleLog("window.mountTTFWidget found")
-    this.ConsoleLog(JSON.stringify(container))
-    if (container == null) {
-      this.ConsoleLog("container is null")
-      return
-    }
-    window.mountTTFWidget(container, {
-      // Required
-      apiKey: "i8ZWxd3vHEgf8vczXE5N",
-      productId: "TH134",
 
-      // Optional customizations
-      widgetEvents: {
-        // Callback when user opens/closes the modal
-        onOpenChange(isOpen) {
-          _this.ConsoleLog(`widget is open: ${isOpen}`);
-        },
-        
-        // Callback when user selects a size within the TrueToForm fit prediction widget
-        onSizeSelection: ({ size, isRecommendedSize }) => {
-          _this.ConsoleLog("Selected size:", size, "Is recommended:", isRecommendedSize);
-        },
+              if (window.mountTTFWidget) {
+                const container = await this.pollForElement("TTF_WIDGET_CONTAINER")
+                if (container == null) {
+                  this.ConsoleLog("container is null after polling")
+                  return
+                }
 
-        // Callback when a size is recommended
-        onSizeRecommendation: (size) => {
-          _this.ConsoleLog("Recommended size:", size);
-        },
-      },
-      widgetStyles: {
-        // Customize button appearance
-        button: {
-          fontSize: "14px",
-          color: "#7e7e7e",
-          fontWeight: 400,
-          lineHeight: "20px",
-          // Customize logo color
-          logoColor: "#000",
-        },
-      },
-    });
-  }
+                this.ConsoleLog("window.mountTTFWidget found")
+                this.ConsoleLog(JSON.stringify(container))
                 
-              
+                window.mountTTFWidget(container, {
+                  // Required
+                  apiKey: "i8ZWxd3vHEgf8vczXE5N",
+                  productId: "TH134",
+
+                  // Optional customizations
+                  widgetEvents: {
+                    // Callback when user opens/closes the modal
+                    onOpenChange(isOpen) {
+                      _this.ConsoleLog(`widget is open: ${isOpen}`);
+                    },
+                    
+                    // Callback when user selects a size within the TrueToForm fit prediction widget
+                    onSizeSelection: ({ size, isRecommendedSize }) => {
+                      _this.ConsoleLog("Selected size:", size, "Is recommended:", isRecommendedSize);
+                    },
+
+                    // Callback when a size is recommended
+                    onSizeRecommendation: (size) => {
+                      _this.ConsoleLog("Recommended size:", size);
+                    },
+                  },
+                  widgetStyles: {
+                    // Customize button appearance
+                    button: {
+                      fontSize: "14px",
+                      color: "#7e7e7e",
+                      fontWeight: 400,
+                      lineHeight: "20px",
+                      // Customize logo color
+                      logoColor: "#000",
+                    },
+                  },
+                });
+              }
+            },
+            async pollForElement(elementId) {
+                const startTime = Date.now()
+                const timeoutMs = 10000
+                const intervalMs = 200
+                
+                while (Date.now() - startTime < timeoutMs) {
+                    const element = document.getElementById(elementId)
+                    if (element) {
+                        this.ConsoleLog(`pollForElement: Found ${elementId} after ${Date.now() - startTime}ms`)
+                        return element
+                    }
+                    await new Promise(resolve => setTimeout(resolve, intervalMs))
+                }
+                
+                this.ConsoleLog(`pollForElement: Timeout waiting for ${elementId} after ${timeoutMs}ms`)
+                return null
             }
     }
 }
