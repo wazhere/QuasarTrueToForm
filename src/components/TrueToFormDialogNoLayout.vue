@@ -14,7 +14,7 @@
         <div style="background-color: red; color: white">
           TTF_WIDGET_CONTAINER
         </div>
-        <div style="border: solid 1px red; height: 80px;"> 
+        <div style="border: solid 1px red; height: 80px;" class="text-center"> 
           (Green is the container)
           <div class="row justify-center" style="padding-top: 10px;">
           <div
