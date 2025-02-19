@@ -96,6 +96,10 @@ export default {
     // const container = this.$refs.ttfWidgetContainerContainer.firstElementChild
     this.ConsoleLog("window.mountTTFWidget found")
     this.ConsoleLog(JSON.stringify(container))
+    if (container == null) {
+      this.ConsoleLog("container is null")
+      return
+    }
     window.mountTTFWidget(container, {
       // Required
       apiKey: "i8ZWxd3vHEgf8vczXE5N",
