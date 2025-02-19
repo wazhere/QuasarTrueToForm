@@ -29,6 +29,11 @@
       <q-card-section>
         <div style="min-width: 500px; text-align: center; padding: 30px 0; background-color: #eee;">EXISTING TH134 CHOOSE SIZE STUFF</div>
       </q-card-section>
+      <q-card-section>
+        <div style="min-width: 500px; text-align: center; padding: 30px 0; background-color: #eee;">
+          {{ Logs }}
+        </div>
+      </q-card-section>
 
       <q-card-actions align="right">
         <q-btn flat label="Unload TTF Script" @click="UnloadWidgetScript()" />
@@ -44,7 +49,15 @@ export default {
     mounted () {
         this.LoadWidgetScript()
     },
+    data () {
+      return {
+        Logs: []
+      }
+    },
     methods: {
+      ConsoleLog (message) {
+        this.Logs.push(message)
+      },
       UnloadWidgetScript () {
         document.querySelector('script[data-script-source="ttf-widget"]').remove()
       },
@@ -70,11 +83,14 @@ export default {
                 document.body.appendChild(script)
             },
             InitializeWidget () {
+              const _this = this
+              _this.ConsoleLog("Initializing widget")
 // Wait until all scripts are loaded and the DOM is fully parsed
   if (window.mountTTFWidget) {
     // the container should be any valid HTML element
     const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
-
+    this.ConsoleLog("Existing widget found")
+      
     window.mountTTFWidget(container, {
       // Required
       apiKey: "i8ZWxd3vHEgf8vczXE5N",
@@ -84,17 +100,17 @@ export default {
       widgetEvents: {
         // Callback when user opens/closes the modal
         onOpenChange(isOpen) {
-          console.log(`widget is open: ${isOpen}`);
+          _this.ConsoleLog(`widget is open: ${isOpen}`);
         },
         
         // Callback when user selects a size within the TrueToForm fit prediction widget
         onSizeSelection: ({ size, isRecommendedSize }) => {
-          console.log("Selected size:", size, "Is recommended:", isRecommendedSize);
+          _this.ConsoleLog("Selected size:", size, "Is recommended:", isRecommendedSize);
         },
 
         // Callback when a size is recommended
         onSizeRecommendation: (size) => {
-          console.log("Recommended size:", size);
+          _this.ConsoleLog("Recommended size:", size);
         },
       },
       widgetStyles: {
