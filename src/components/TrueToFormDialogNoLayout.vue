@@ -95,8 +95,8 @@ export default {
 // Wait until all scripts are loaded and the DOM is fully parsed
   if (window.mountTTFWidget) {
     // the container should be any valid HTML element
-    //const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
-    const container = this.$refs.ttfWidgetContainer
+    const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
+    // const container = this.$refs.ttfWidgetContainer
     this.ConsoleLog("Existing widget found")
     this.ConsoleLog(JSON.stringify(container))
     window.mountTTFWidget(container, {
