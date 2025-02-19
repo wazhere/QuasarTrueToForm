@@ -48,7 +48,9 @@
 export default {
     name: 'TrueToForm',
     mounted () {
+      setTimeout(() => {
         this.LoadWidgetScript()
+      }, 1000)
     },
     data () {
       return {
