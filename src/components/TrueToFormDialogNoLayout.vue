@@ -61,12 +61,15 @@ export default {
         document.querySelector('script[data-script-source="ttf-widget"]').remove()
       },
         LoadWidgetScript () {
+                this.ConsoleLog("LoadWidgetScript function called")
                 // Check if the script is already loaded
                 if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/widget.js"]')) {
+                    this.ConsoleLog("Widget script already loaded")
                     this.InitializeWidget()
                     return
                 }
 
+                this.ConsoleLog("Loading widget script")
                 // Dynamically create a script tag and load the external JS file
                 const script = document.createElement('script')
                 script.type = 'module'
@@ -89,7 +92,7 @@ export default {
     // the container should be any valid HTML element
     const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
     this.ConsoleLog("Existing widget found")
-      
+    this.ConsoleLog(JSON.stringify(container))
     window.mountTTFWidget(container, {
       // Required
       apiKey: "i8ZWxd3vHEgf8vczXE5N",
