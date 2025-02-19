@@ -50,7 +50,7 @@ export default {
       },
         LoadWidgetScript () {
                 // Check if the script is already loaded
-                if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/custom.js"]')) {
+                if (document.querySelector('script[src="https://ttf-widget.pages.dev/assets/integrations/widget.js"]')) {
                     this.InitializeWidget()
                     return
                 }
@@ -58,7 +58,7 @@ export default {
                 // Dynamically create a script tag and load the external JS file
                 const script = document.createElement('script')
                 script.type = 'module'
-                script.src = 'https://ttf-widget.pages.dev/assets/integrations/custom.js'
+                script.src = 'https://ttf-widget.pages.dev/assets/integrations/widget.js'
                 script.setAttribute('data-script-source', 'ttf-widget')
 
                 // Once the script is loaded, initialize the widget
@@ -70,24 +70,48 @@ export default {
                 document.body.appendChild(script)
             },
             InitializeWidget () {
-                const container = document.querySelector('#TTF_WIDGET_CONTAINER')
+// Wait until all scripts are loaded and the DOM is fully parsed
+  if (window.mountTTFWidget) {
+    // the container should be any valid HTML element
+    const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
 
-                if (!container) {
-                    console.error('TTF Widget container not found.')
-                    return
-                }
+    window.mountTTFWidget(container, {
+      // Required
+      apiKey: "i8ZWxd3vHEgf8vczXE5N",
+      productId: "TH134",
 
-                const apiKey = container.getAttribute('data-api-key')
-                const productId = container.getAttribute('data-product-id')
+      // Optional customizations
+      widgetEvents: {
+        // Callback when user opens/closes the modal
+        onOpenChange(isOpen) {
+          console.log(`widget is open: ${isOpen}`);
+        },
+        
+        // Callback when user selects a size within the TrueToForm fit prediction widget
+        onSizeSelection: ({ size, isRecommendedSize }) => {
+          console.log("Selected size:", size, "Is recommended:", isRecommendedSize);
+        },
 
-                if (!apiKey || !productId) {
-                    console.error('Missing API key or Product ID.')
-                    // return
-                }
-
-            // Call the widget's initialization logic here if necessary
-            // This depends on what the external JS provides
-            // console.log("TTF Widget initialized with API Key:", apiKey, "and Product ID:", productId)
+        // Callback when a size is recommended
+        onSizeRecommendation: (size) => {
+          console.log("Recommended size:", size);
+        },
+      },
+      widgetStyles: {
+        // Customize button appearance
+        button: {
+          fontSize: "14px",
+          color: "#7e7e7e",
+          fontWeight: 400,
+          lineHeight: "20px",
+          // Customize logo color
+          logoColor: "#000",
+        },
+      },
+    });
+  }
+                
+              
             }
     }
 }
