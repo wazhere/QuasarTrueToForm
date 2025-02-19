@@ -4,7 +4,6 @@
   <q-dialog
     :model-value="modelValue"
     @update:model-value="$emit('update:modelValue', $event)"
-    @before-show="InitializeWidget"
   >
     <q-card>
       <q-card-section>
