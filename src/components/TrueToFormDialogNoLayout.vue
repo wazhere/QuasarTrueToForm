@@ -93,7 +93,7 @@ export default {
   if (window.mountTTFWidget) {
     // the container should be any valid HTML element
     // const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
-    const container = this.$refs.ttfWidgetContainerContainer.$el.querySelector('div');
+    const container = this.$refs.ttfWidgetContainerContainer.firstElementChild
     this.ConsoleLog("window.mountTTFWidget found")
     this.ConsoleLog(JSON.stringify(container))
     window.mountTTFWidget(container, {
