@@ -18,6 +18,7 @@
           (Green is the container)
           <div class="row justify-center" style="padding-top: 10px;">
           <div
+            ref="ttfWidgetContainer"
             style="border: solid 2px green; height: 40px; min-width: 500px;"
               id="TTF_WIDGET_CONTAINER"
               data-product-id="TH134"
@@ -94,7 +95,8 @@ export default {
 // Wait until all scripts are loaded and the DOM is fully parsed
   if (window.mountTTFWidget) {
     // the container should be any valid HTML element
-    const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
+    //const container = document.getElementById("TTF_WIDGET_CONTAINER"); // feel free to query the container in any other ways
+    const container = this.$refs.ttfWidgetContainer
     this.ConsoleLog("Existing widget found")
     this.ConsoleLog(JSON.stringify(container))
     window.mountTTFWidget(container, {
